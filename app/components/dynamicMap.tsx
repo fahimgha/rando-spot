@@ -1,5 +1,5 @@
 "use client";
-import { MapContainer, TileLayer } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { LatLngExpression, LatLngBoundsLiteral } from "leaflet";
 import "leaflet/dist/leaflet.css";
 
@@ -12,9 +12,8 @@ const center: LatLngExpression = [46.603354, 1.888334];
 
 export default function DynamicMap() {
   return (
-    <div className="w-screen h-screen">
+    <div className="flex items-center justify-center w-screen h-screen">
       <MapContainer
-        style={{ width: "100%", height: "100%" }}
         className="map"
         center={center}
         zoom={5}
