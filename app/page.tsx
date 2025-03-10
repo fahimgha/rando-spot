@@ -1,5 +1,5 @@
 "use client";
-import Map from "./components/map";
+import Map from "./components/map/map";
 
 export default function Home() {
   return (
