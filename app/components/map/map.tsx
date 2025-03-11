@@ -11,6 +11,10 @@ export default function Map() {
   const [result, setResult] = useState<string[]>([]);
   const [hikeData, setHikeData] = useState<any>();
 
+  useEffect(() => {
+    fetchGetHikesByCountryId();
+  }, []);
+
   const fetchGetHikesByCountryId = async () => {
     try {
       const data = await outdoorActiveApi.getHikesByCountryId("1009601");
@@ -31,10 +35,6 @@ export default function Map() {
     }
   };
 
-  useEffect(() => {
-    fetchGetHikesByCountryId();
-  }, []);
-
   return (
     <div className="relative">
       <div className="absolute flex justify-center w-full top-4 z-[1000]">
@@ -51,7 +51,7 @@ export default function Map() {
       ) : (
         <p className="absolute text-center text-white">Loading...</p>
       )}
-      <DynamicMap />
+      <DynamicMap data={hikeData} />
     </div>
   );
 }

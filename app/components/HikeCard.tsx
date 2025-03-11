@@ -41,7 +41,7 @@ export default function HikeCard({
         <h2 className="text-xl font-bold mb-2">{title}</h2>
         <div className="flex gap-4 mb-3 text-sm text-gray-600">
           <span>📍 {`${(distance / 1000 || 0).toFixed(1)} km`}</span>
-          <span>⏱️ {`${hours}h${minutes}m`}</span>
+          <span>⏱️ {`${hours}h${minutes} m`}</span>
         </div>
         <p className="text-gray-600">{description}</p>
       </div>
