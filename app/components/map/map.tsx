@@ -9,7 +9,7 @@ const DynamicMap = dynamic(() => import("@/app/components/map/dynamicMap"), {
 });
 export default function Map() {
   const [result, setResult] = useState<string[]>([]);
-  const [hikeData, setHikeData] = useState([]);
+  const [hikeData, setHikeData] = useState<any>();
 
   const fetchGetHikesByCountryId = async () => {
     try {
@@ -40,11 +40,13 @@ export default function Map() {
       <div className="absolute flex justify-center w-full top-4 z-[1000]">
         <ButtonSearch onClick={getRandomHike} />
       </div>
-      {hikeData ? (
+      {hikeData && hikeData.tour[0] ? (
         <HikeCard
-          title={"hikeData.tour[0].title"}
-          description={"hikeData.tour[0].texts?.short"}
-          difficulty={1}
+          title={hikeData.tour[0].title}
+          description={hikeData.tour[0]?.shortText}
+          imageUrl={hikeData.tour[0].primaryImage.id}
+          distance={hikeData.tour[0].length}
+          duration={hikeData.tour[0].time.min}
         />
       ) : (
         <p className="absolute text-center text-white">Loading...</p>

@@ -1,10 +1,11 @@
 const API_KEY = "yourtest-outdoora-ctiveapi";
-const BASE_URL = "https://www.outdooractive.com/api/v2/project/api-dev-oa";
+const BASE_URL_V2 = "https://www.outdooractive.com/api/v2/project/api-dev-oa";
+const BASE_URL_V1 = "https://www.outdooractive.com/api/project/api-dev-oa";
 const LANG = "fr";
 
 export const outdoorActiveApi = {
   async getHikesByCountryId(areaId: string): Promise<string[]> {
-    const url = `${BASE_URL}/filter/tour?area=${areaId}&key=${API_KEY}&lang=${LANG}`;
+    const url = `${BASE_URL_V2}/filter/tour?area=${areaId}&key=${API_KEY}&lang=${LANG}`;
 
     try {
       const response = await fetch(url, {
@@ -26,7 +27,7 @@ export const outdoorActiveApi = {
     }
   },
   async getHikeById(tourId: string): Promise<string[]> {
-    const url = `${BASE_URL}/oois/${tourId}?key=${API_KEY}&lang=${LANG}`;
+    const url = `${BASE_URL_V1}/oois/${tourId}?key=${API_KEY}&lang=${LANG}`;
 
     try {
       const response = await fetch(url, {
