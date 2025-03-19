@@ -1,7 +1,7 @@
 export default function ButtonSearch({ onClick }: { onClick: () => void }) {
   return (
     <button
-      className="p-2 px-4 text-center bg-[#f4ede4]/80 backdrop-blur-sm rounded-lg shadow-lg cursor-pointer hover:bg-[#f4ede4]/90"
+      className="w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-md transition-colors duration-200 flex items-center justify-center"
       onClick={onClick}
     >
       Trouve ma Rando

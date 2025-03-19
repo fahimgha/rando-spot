@@ -79,7 +79,6 @@ export default function DynamicMap({ data }: DynamicMapProps) {
         />
         {tour.startingPoint && (
           <>
-            {/* Marqueur de départ */}
             <Marker
               position={[tour.startingPoint.lat, tour.startingPoint.lon]}
               icon={L.icon({

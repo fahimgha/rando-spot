@@ -1,25 +1,44 @@
 import dynamic from "next/dynamic";
 import ButtonSearch from "@/app/components/searchButton";
+import NavBar from "@/app/components/navbar";
 import { useEffect, useState } from "react";
 import { outdoorActiveApi } from "@/app/services/outdoorActiveApi";
 import { HikeCard } from "@/app/components/HikeCard";
+
 const DynamicMap = dynamic(() => import("@/app/components/map/dynamicMap"), {
   ssr: false,
 });
+
 export default function Map() {
-  const [result, setResult] = useState<string[]>([]);
+  const [result, setResult] = useState<any[]>([]);
   const [hikeData, setHikeData] = useState<any>();
+  const [selectedCountryId, setSelectedCountryId] = useState<number | null>(
+    null
+  );
 
   useEffect(() => {
-    fetchGetHikesByCountryId();
-  }, []);
+    if (selectedCountryId) {
+      fetchGetHikesByCountryId(selectedCountryId);
+    }
+  }, [selectedCountryId]);
 
-  const fetchGetHikesByCountryId = async () => {
-    try {
-      const data = await outdoorActiveApi.getHikesByCountryId("1009601");
-      setResult(data);
-    } catch (error) {
-      console.error("Erreur:", error);
+  const fetchGetHikesByCountryId = async (countryId: number) => {
+    console.log("selectedCountryId", countryId);
+
+    if (countryId === 1) {
+      try {
+        const data = await outdoorActiveApi.getHikesInEurope();
+        setResult(data);
+      } catch (error) {
+        console.error("Erreur:", error);
+      }
+    } else {
+      try {
+        const data = await outdoorActiveApi.getHikesByCountryId(countryId);
+        setResult(data);
+      } catch (error) {
+        console.error("Erreur:", error);
+      }
     }
   };
 
@@ -36,9 +55,10 @@ export default function Map() {
 
   return (
     <div className="relative">
-      <div className="absolute flex  top-4 left-1/2 transform -translate-x-1/2  z-[1000]">
-        <ButtonSearch onClick={getRandomHike} />
-      </div>
+      <NavBar
+        onSelectCountry={(country) => setSelectedCountryId(country.id)}
+        getRandomHike={getRandomHike}
+      />
       {hikeData && hikeData.tour[0] ? (
         <div className="flex flex-col gap-4">
           <HikeCard
